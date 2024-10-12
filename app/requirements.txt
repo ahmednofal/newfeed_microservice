@@ -1,0 +1,6 @@
+Flask
+# Flask-GraphQL
+Flask-Injector
+graphene
+pymysql
+pydantic

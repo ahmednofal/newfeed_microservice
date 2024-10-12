@@ -1,0 +1,27 @@
+services:
+  flask-app:
+    build: 
+      context: ./app
+      network: host
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_ENV=development
+      # - SQLALCHEMY_DATABASE_URI=mysql+pymysql://root:password@db/mydatabase
+    depends_on:
+      - db
+    volumes:
+      - ./app:/app
+
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: mydatabase
+    ports:
+      - "3306:3306"
+    volumes:
+      - db-data:/var/lib/mysql
+
+volumes:
+  db-data:
