@@ -1,8 +1,8 @@
 import pymysql
-from app.core.config import settings
+from core.config import settings
 
 # Database connection function
-def get_db_connection():
+def get_db_connection() -> pymysql.connections.Connection:
     return pymysql.connect(
         host=settings.DB_HOST,
         user=settings.DB_USER,
