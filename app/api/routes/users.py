@@ -32,9 +32,9 @@ def create_user(body: UserCreate):
     connection: pymysql.connections.Connection = get_db_connection()
     try:
         with connection.cursor() as cursor:
-            cursor.execute("INSERT INTO users (handle, email, password_hash) VALUES (%s, %s, %s)", 
+            cursor.execute("INSERT INTO user (handle, email, password_hash) VALUES (%s, %s, %s)", 
                            (body.handle, body.email, body.password_hash))
             connection.commit()
-            body.id = cursor.lastrowid  # Get the last inserted ID
+            return jsonify({"message": f"Created User {cursor.lastrowid}"}), 201
     except pymysql.MySQLError as e:
         return jsonify({'error': str(e)}), 400  # Return a meaningful error message

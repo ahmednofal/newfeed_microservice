@@ -5,8 +5,8 @@ import injector
 import pymysql
 
 from api.deps import MySQLModule
-
 from api.main import api_base_bp
+from core.db import apply_ddl_if_needed
 
 app = Flask("newsfeed_app")
 app.register_blueprint(api_base_bp)
@@ -23,4 +23,5 @@ if __name__ == '__main__':
     for rule in app.url_map.iter_rules():
         print(f"Endpoint: {rule.endpoint}, URL: {rule}")
     
+    apply_ddl_if_needed()
     app.run(host='0.0.0.0', port=5000, debug=True)
