@@ -1,6 +1,10 @@
 Flask
+Flask-Pydantic
 # Flask-GraphQL
 Flask-Injector
 graphene
 pymysql
 pydantic
+pydantic[all]
+pydantic[email]
+injector
