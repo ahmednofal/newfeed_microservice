@@ -5,6 +5,8 @@ To get started manipulating the data; all endpoints will be listed in the logs.
 - [Flask-based newsfeed microservice](#flask-based-newsfeed-microservice)
 - [Project Structure](#project-structure)
 - [Design](#design)
+- [Database](#database)
+  - [Setup](#setup)
 - [Usage](#usage)
   - [Starting the microservice](#starting-the-microservice)
   - [Basic fetching and updating using CURL](#basic-fetching-and-updating-using-curl)
@@ -45,6 +47,18 @@ The project follows a structured layout:
 
 # Design
 ![](./docs/erd.png)
+
+# Database 
+## Setup
+
+To set up the database schema, you can find the DDL file in the following location:
+
+- **DDL File:** [Database](app/db/migrations/ddl.sql)
+
+The schema is automatically applied when no tables are in the database.
+The file can be run via connecting to the database using any connector (e.g vscode extension) and applying the file
+
+
 
 # Usage
 ## Starting the microservice
