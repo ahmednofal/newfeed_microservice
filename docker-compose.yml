@@ -6,8 +6,7 @@ services:
     ports:
       - "5000:5000"
     environment:
-      - FLASK_ENV=development
-      # - SQLALCHEMY_DATABASE_URI=mysql+pymysql://root:password@db/mydatabase
+      - FLASK_ENV=${FLASK_ENV:-dev}
     depends_on:
       - db
     volumes:
