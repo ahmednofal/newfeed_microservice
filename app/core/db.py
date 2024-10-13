@@ -12,6 +12,21 @@ def get_db_connection() -> pymysql.connections.Connection:
         cursorclass=pymysql.cursors.DictCursor
     )
 
+def drop_all():
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    # Check if any tables exist
+    with open('/app/db/migrations/drop_all.sql', 'r') as file:
+        ddl_commands = file.read()
+        for command in ddl_commands.split(';'):
+            command = command.strip()
+            if command:  # Execute only non-empty commands
+                cursor.execute(command)
+
+    conn.commit()
+    cursor.close()
+    conn.close()
 def apply_ddl_if_needed():
     conn = get_db_connection()
     cursor = conn.cursor()
@@ -30,6 +45,22 @@ def apply_ddl_if_needed():
                     cursor.execute(command)
     else:
         print("Tables already exist. Skipping DDL application.")
+
+    conn.commit()
+    cursor.close()
+    conn.close()
+
+def init_test_db():
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    # Check if any tables exist
+    with open('/app/db/migrations/init_test.sql', 'r') as file:
+        ddl_commands = file.read()
+        for command in ddl_commands.split(';'):
+            command = command.strip()
+            if command:  # Execute only non-empty commands
+                cursor.execute(command)
 
     conn.commit()
     cursor.close()
