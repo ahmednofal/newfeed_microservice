@@ -30,14 +30,14 @@ app.register_blueprint(api_base_bp)
 # FlaskInjector(app=app, modules=[configure])
 
 if __name__ == '__main__':
-    for rule in app.url_map.iter_rules():
-        print(f"Endpoint: {rule.endpoint}, URL: {rule}")
     
     mode = os.getenv('FLASK_ENV', 'prod')  # Default to 'production'
     if mode == 'dev':
         drop_all()
         apply_ddl_if_needed()
         init_test_db()
+        for rule in app.url_map.iter_rules():
+            print(f"Endpoint: {rule.endpoint}, URL: {rule}")
         app.run(host='0.0.0.0', port=5000, debug=True)
     else:
         apply_ddl_if_needed()
