@@ -7,6 +7,7 @@ To get started manipulating the data; all endpoints will be listed in the logs.
 - [Design](#design)
 - [Database](#database)
   - [Setup](#setup)
+- [Sample Output](#sample-output) ⬅️
 - [Usage](#usage)
   - [Starting the microservice](#starting-the-microservice)
   - [Basic fetching and updating using CURL](#basic-fetching-and-updating-using-curl)
@@ -89,7 +90,46 @@ curl -X PUT "http://localhost:5000/api/v1/posts/<post_id>" -d '{"content": "<upd
 
 curl -X DELETE "http://localhost:5000/api/v1/posts/<post_id>"  # Delete post
 ```
-
+### Sample Output
+```bash
+curl -X GET "http://localhost:5000/api/v1/posts/" 
+{
+  "data": {
+    "posts": [
+      {
+        "author_id": 1,
+        "content": "This is the first post!",
+        "created_at": "Sun, 13 Oct 2024 05:27:12 GMT",
+        "id": 1
+      },
+      {
+        "author_id": 1,
+        "content": "This is the second post!",
+        "created_at": "Sun, 13 Oct 2024 05:27:12 GMT",
+        "id": 2
+      },
+      {
+        "author_id": 2,
+        "content": "This is the third post!",
+        "created_at": "Sun, 13 Oct 2024 05:27:12 GMT",
+        "id": 3
+      },
+      {
+        "author_id": 3,
+        "content": "This is the fourth post!",
+        "created_at": "Sun, 13 Oct 2024 05:27:12 GMT",
+        "id": 4
+      },
+      {
+        "author_id": 2,
+        "content": "This is a deleted post!",
+        "created_at": "Sun, 13 Oct 2024 05:27:12 GMT",
+        "id": 5
+      }
+    ]
+  }
+}
+```
 ### Comment endpoints
 ```bash
 curl -X GET "http://localhost:5000/api/v1/posts/<post_id>/comments"  # Get comments for post
