@@ -46,14 +46,14 @@ The project follows a structured layout:
 ```
 
 # Design
-![](./docs/erd.png)
+![ERD Diagram](./docs/erd.png)
 
 # Database 
 ## Setup
 
 To set up the database schema, you can find the DDL file in the following location:
 
-- **DDL File:** [Database](app/db/migrations/ddl.sql)
+- **DDL SQL File implementing the ERD diagram:** [Database](app/db/migrations/ddl.sql)
 
 The schema is automatically applied when no tables are in the database.
 The file can be run via connecting to the database using any connector (e.g vscode extension) and applying the file
