@@ -2,8 +2,9 @@
 
 To get started manipulating the data; all endpoints will be listed in the logs.
 
-### Usage
-Start the microservice
+
+# Design
+![](./docs/erd.png)
 
 `FLASK_ENV=dev docker compose -p <some_unique_id> up -d --build`
 
