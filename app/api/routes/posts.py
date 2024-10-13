@@ -16,8 +16,7 @@ class Post(BaseModel):
     created_at: datetime
 
 @posts_bp.route('/', methods=['GET'], strict_slashes=False)
-@inject
-def get_posts(connection: pymysql.connections.Connection):
+def get_posts():
     connection = get_db_connection()
     try:
         with connection.cursor() as cursor:
