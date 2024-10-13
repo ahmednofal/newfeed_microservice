@@ -7,7 +7,7 @@ CREATE TABLE `user` (
 );
 
 CREATE TABLE `post` (
-  `id` CHAR(36) PRIMARY KEY NOT NULL,
+  `id` BIGINT PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `content` TEXT NOT NULL,
   `author_id` BIGINT NOT NULL,
   `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -18,7 +18,7 @@ CREATE TABLE `post` (
 
 CREATE TABLE `like_up` (
   `liker_id` BIGINT NOT NULL,
-  `post_id` CHAR(36) NOT NULL,
+  `post_id` BIGINT NOT NULL,
   PRIMARY KEY (`liker_id`, `post_id`),
   FOREIGN KEY (`liker_id`) REFERENCES `user` (`id`) ON DELETE CASCADE,
   FOREIGN KEY (`post_id`) REFERENCES `post` (`id`) ON DELETE CASCADE,
@@ -27,9 +27,9 @@ CREATE TABLE `like_up` (
 );
 
 CREATE TABLE `share` (
-  `id` CHAR(36) PRIMARY KEY NOT NULL,
+  `id` BIGINT PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `sharer_id` BIGINT NOT NULL,
-  `post_id` CHAR(36) NOT NULL,
+  `post_id` BIGINT NOT NULL,
   FOREIGN KEY (`sharer_id`) REFERENCES `user` (`id`) ON DELETE CASCADE,
   FOREIGN KEY (`post_id`) REFERENCES `post` (`id`) ON DELETE CASCADE,
   INDEX `idx_share_sharer` (`sharer_id`),
@@ -48,8 +48,8 @@ CREATE TABLE `follow` (
 );
 
 CREATE TABLE `comment` (
-  `id` CHAR(36) PRIMARY KEY NOT NULL,
-  `post_id` CHAR(36) NOT NULL,
+  `id` BIGINT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `post_id` BIGINT NOT NULL,
   `author_id` BIGINT NOT NULL,
   `content` TEXT NOT NULL,
   `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,

@@ -1,4 +1,6 @@
 from flask import Flask
+from pydantic import BaseModel
+from json import JSONEncoder
 from flask_injector import FlaskInjector
 from injector import Binder
 import injector
@@ -8,8 +10,15 @@ from api.deps import MySQLModule
 from api.main import api_base_bp
 from core.db import apply_ddl_if_needed
 
+# class PydanticEncoder(JSONEncoder):
+#     def default(self, obj):
+#         if isinstance(obj, BaseModel):
+#             return obj.dict()  # Automatically convert Pydantic models to dict
+#         return super().default(obj)
+
 app = Flask("newsfeed_app")
 app.register_blueprint(api_base_bp)
+# app.json_encoder = PydanticEncoder
 
 
 # Flask-Injector setup
