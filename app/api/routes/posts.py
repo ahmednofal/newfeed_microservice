@@ -16,8 +16,29 @@ class Post(BaseModel):
     created_at: datetime
 
 @posts_bp.route('/', methods=['GET'], strict_slashes=False)
-def get_posts():
-    return jsonify({"message": "List of post"})
+@inject
+def get_posts(connection: pymysql.connections.Connection):
+    connection = get_db_connection()
+    try:
+        with connection.cursor() as cursor:
+        # Correct SQL syntax to select specific fields from user table
+            cursor.execute("SELECT * FROM post ")
+            posts = cursor.fetchall()  # Fetch the user data
+            if posts:  # Check if the user was found
+                return jsonify({"data":{"posts": [Post(**{
+                    "id": post['id'],  # Add the ID manually
+                    "content": post['content'],
+                    "author_id": post['author_id'],
+                    "created_at": post['created_at']}).dict() for post in posts]}}), 200
+            else:
+                return jsonify({"error": "post not found"}), 404  # User not found
+    except pymysql.MySQLError as e:
+        return jsonify({'error': str(e)}), 400
+    except Exception as e:
+        return jsonify({'error': str(e)}), 400
+    finally:
+        connection.close()
+
 
 @posts_bp.route('/<int:post_id>', methods=['GET'], strict_slashes=False)
 def get_post(post_id):
